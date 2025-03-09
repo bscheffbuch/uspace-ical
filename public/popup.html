@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>u:space iCal Downloader</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta name="color-scheme" content="light dark">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 id="app-title">u:space Calendar</h1>
+      <div id="user-controls" class="hidden">
+        <div id="profile-menu-trigger">
+          <span id="username-display"></span>
+          <img id="profile-pic-mini" src="icons/default-avatar.png" alt="Profile">
+        </div>
+      </div>
+    </header>
+    
+    <!-- User greeting message -->
+    <div id="greeting-section" class="greeting hidden">
+      <p id="user-greeting">Hello!</p>
+    </div>
+    
+    <!-- Settings Dropdown Menu - Improved Design -->
+    <div id="settings-dropdown" class="dropdown-menu" role="menu" aria-labelledby="profile-menu-trigger">
+      <div class="dropdown-header">
+        <h3 id="settings-title">Settings</h3>
+      </div>
+      <div class="dropdown-item" role="menuitem">
+        <label for="theme-select" id="theme-title">
+          <i class="fas fa-palette" aria-hidden="true"></i>
+          Theme:
+        </label>
+        <select id="theme-select" class="form-control" aria-label="Select theme">
+          <option value="system" id="theme-system">System</option>
+          <option value="light" id="theme-light">Light</option>
+          <option value="dark" id="theme-dark">Dark</option>
+        </select>
+      </div>
+      <div class="dropdown-item" role="menuitem">
+        <label for="language-dropdown-select" id="language-dropdown-title">
+          <i class="fas fa-language" aria-hidden="true"></i>
+          Language:
+        </label>
+        <select id="language-dropdown-select" class="form-control" aria-label="Select language">
+          <option value="en" id="lang-dropdown-en">English</option>
+          <option value="de" id="lang-dropdown-de">Deutsch</option>
+        </select>
+      </div>
+      <div class="dropdown-divider"></div>
+      <a id="logout-btn" class="menu-link logout" role="menuitem">
+        <span id="logout-text">Sign out</span>
+      </a>
+    </div>
+    
+    <div id="login-section" class="card">
+      <div class="card-content">
+        <p>Sign in to access your course calendars</p>
+        <button id="login-btn" class="btn primary">
+          <i class="fas fa-sign-in-alt"></i> Sign in to u:space
+        </button>
+        <div id="login-status" class="status-message"></div>
+      </div>
+    </div>
+    
+    <div id="user-info" class="card hidden">
+      <div class="user-header">
+        <!-- Content moved to dropdown -->
+      </div>
+    </div>
+
+    <div id="semester-section" class="card hidden">
+      <div class="card-content">
+        <h2 id="calendar-options-title">Calendar Options</h2>
+        
+        <div class="form-group">
+          <label for="semester-select" id="semester-select-label">Select Semester:</label>
+          <select id="semester-select" class="form-control">
+            <option value="">Loading semesters...</option>
+          </select>
+        </div>
+        
+        <div class="option-group">
+          <p class="option-title" id="delivery-method-title">Delivery Method:</p>
+          
+          <div class="radio-option">
+            <input type="radio" id="delivery-download" name="calendar-delivery" value="download" checked>
+            <label for="delivery-download" id="delivery-download-label">Download file</label>
+          </div>
+          
+          <div class="radio-option">
+            <input type="radio" id="delivery-webcal" name="calendar-delivery" value="webcal">
+            <label for="delivery-webcal" id="delivery-webcal-label">Open with calendar app</label>
+          </div>
+        </div>
+        
+        <div id="format-options" class="option-group">
+          <p class="option-title" id="format-title">Calendar Format:</p>
+          
+          <div class="radio-option">
+            <input type="radio" id="format-single" name="calendar-format" value="single" checked>
+            <label for="format-single" id="format-single-label">Single calendar file (all courses merged)</label>
+          </div>
+          
+          <div class="radio-option">
+            <input type="radio" id="format-separate" name="calendar-format" value="separate">
+            <label for="format-separate" id="format-separate-label">Separate calendar files (.zip archive)</label>
+          </div>
+        </div>
+        
+        <button id="download-btn" class="btn primary" disabled>
+          Get Calendar
+        </button>
+        
+        <div id="download-status" class="status-message"></div>
+      </div>
+    </div>
+    
+    <!-- Convert progress section to a toast style notification -->
+    <div id="progress-section" class="progress-toast hidden">
+      <h3>Download Progress</h3>
+      <div class="progress-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <p id="progress-text">0%</p>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+{
+  "extension": {
+    "name": "uSpace iCal Downloader",
+    "title": "u:space Kalender"
+  },
+  "login": {
+    "title": "Bei uSpace anmelden",
+    "button": "Bei uSpace anmelden",
+    "checking": "Anmeldestatus wird überprüft...",
+    "success": "Erfolgreich angemeldet!"
+  },
+  "user": {
+    "unknownUser": "Unbekannter Benutzer"
+  },
+  "calendar": {
+    "options": "Kalenderoptionen",
+    "selectSemester": "Semester auswählen:",
+    "semesterPlaceholder": "Semester auswählen...",
+    "loadingPlaceholder": "Semester werden geladen..."
+  },
+  "delivery": {
+    "title": "Zustellmethode:",
+    "download": "Datei herunterladen",
+    "webcal": "Mit Kalender-App öffnen"
+  },
+  "format": {
+    "title": "Kalenderformat:",
+    "single": "Einzelne Kalenderdatei (alle Kurse zusammengefasst)",
+    "separate": "Separate Kalenderdateien (.zip-Archiv)"
+  },
+  "buttons": {
+    "download": "Kalender herunterladen",
+    "open": "Kalender öffnen",
+    "logout": "Abmelden"
+  },
+  "status": {
+    "downloading": "Kalender werden heruntergeladen...",
+    "processing": "Kalender werden verarbeitet...",
+    "success": "Kalender erfolgreich heruntergeladen!",
+    "openingWebcal": "Öffne Kalender in Ihrer Standard-App...",
+    "error": "Fehler: {0}"
+  },
+  "language": {
+    "title": "Sprache",
+    "en": "English",
+    "de": "Deutsch",
+    "system": "System"
+  },
+  "theme": {
+    "title": "Design",
+    "system": "System",
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
+  "settings": {
+    "title": "Einstellungen"
+  },
+  "greeting": {
+    "hello": "Hallo, {name}!"
+  }
+}

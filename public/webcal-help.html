@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calendar Subscription</title>
+  <meta name="color-scheme" content="light dark">
+  <style>
+    /* Base variables */
+    :root {
+      /* Light mode colors */
+      --primary-color: #0063a6;
+      --primary-hover: #004c80;
+      --text-color: #333333;
+      --background: #f8f9fa;
+      --card-bg: #ffffff;
+      --border-color: #e0e0e0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --border-radius: 12px;
+      --btn-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Dark mode - using media query for system preference */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary-color: #2196f3;
+        --primary-hover: #1976d2;
+        --text-color: #e0e0e0;
+        --background: #121212;
+        --card-bg: #1e1e1e;
+        --border-color: #333333;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        --btn-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+    }
+    
+    /* Theme classes for explicit theme selection */
+    .theme-light {
+      --primary-color: #0063a6;
+      --primary-hover: #004c80;
+      --text-color: #333333;
+      --background: #f8f9fa;
+      --card-bg: #ffffff;
+      --border-color: #e0e0e0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --btn-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    }
+    
+    .theme-dark {
+      --primary-color: #2196f3;
+      --primary-hover: #1976d2;
+      --text-color: #e0e0e0;
+      --background: #121212;
+      --card-bg: #1e1e1e;
+      --border-color: #333333;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      --btn-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--background);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 30px;
+      border-radius: var(--border-radius);
+      background-color: var(--card-bg);
+      box-shadow: var(--shadow);
+    }
+    
+    h1 {
+      color: var(--primary-color);
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+    
+    h2 {
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    
+    ol {
+      padding-left: 20px;
+    }
+    
+    li {
+      margin-bottom: 10px;
+    }
+    
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: var(--border-radius);
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      box-shadow: var(--btn-shadow);
+      transition: all 0.3s;
+      margin-bottom: 10px;
+      width: 100%;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Calendar Subscription</h1>
+    
+    <p>We tried to open your calendar app automatically, but it may not have worked. Here are a few options:</p>
+    
+    <a id="try-again-btn" href="#" class="btn">Try Opening Calendar App Again</a>
+    <a id="download-btn" href="#" class="btn">Download Calendar File</a>
+    
+    <h2>Manual Calendar Subscription Instructions</h2>
+    
+    <ol>
+      <li>Download the calendar file using the button above</li>
+      <li>Open your calendar application (Google Calendar, Apple Calendar, Outlook, etc.)</li>
+      <li>Look for an option to "Add Calendar", "Subscribe to Calendar", or "Import"</li>
+      <li>Select the downloaded .ics file</li>
+      <li>Follow your calendar application's prompts to complete the subscription</li>
+    </ol>
+    
+    <p>Note: For a true subscription (automatic updates), your calendar app must support the "webcal://" protocol or subscription to ICS files from a URL.</p>
+  </div>
+  
+  <script src="webcal-help.js"></script>
+</body>
+</html>

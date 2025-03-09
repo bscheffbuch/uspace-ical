@@ -1,0 +1,960 @@
+/* normalize css starts here */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* normalize css ends here */
+
+/* Base theme variables - will be overridden by specific themes */
+:root {
+  /* Base colors - these get overridden by theme classes and media queries */
+  --primary-color: #0063a6;
+  --primary-hover: #004c80;
+  --text-color: #333333;
+  --light-text: #666666;
+  --background: #f8f9fa;
+  --card-bg: #ffffff;
+  --border-color: #e0e0e0;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --info-color: #17a2b8;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --border-radius: 12px;
+  --btn-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  --primary-color-rgb: 0, 99, 166; /* RGB version of primary color for rgba() */
+}
+
+/* Light theme - applied via class or when system is set to light */
+.theme-light {
+  --primary-color: #0063a6;
+  --primary-hover: #004c80;
+  --text-color: #000000;
+  --light-text: #666666;
+  --background: #f8f9fa;
+  --card-bg: #ffffff;
+  --border-color: #e0e0e0;
+  --success-color: #28a745;
+  --error-color: #dc3545;
+  --info-color: #17a2b8;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --btn-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  --primary-color-rgb: 0, 99, 166;
+  --radio-accent-color: #0063a6; /* Explicit accent color for radio buttons in light theme */
+}
+
+/* Dark theme - applied via class or when system is set to dark */
+.theme-dark {
+  --primary-color: #2196f3;
+  --primary-hover: #1976d2;
+  --text-color: #ffffff;
+  --light-text: #aaaaaa;
+  --background: #121212;
+  --card-bg: #1e1e1e;
+  --border-color: #333333;
+  --success-color: #4caf50;
+  --error-color: #7f1e27;
+  --info-color: #03a9f4;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --btn-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  --primary-color-rgb: 33, 150, 243;
+}
+
+/* System preference handling */
+@media (prefers-color-scheme: light) {
+  body:not(.theme-dark) {
+    --primary-color: #0063a6;
+    --primary-hover: #004c80;
+    --text-color: #000000;
+    --light-text: #666666;
+    --background: #f8f9fa;
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --success-color: #28a745;
+    --error-color: #dc3545;
+    --info-color: #17a2b8;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --btn-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    --primary-color-rgb: 0, 99, 166;
+    --radio-accent-color: #0063a6; /* Explicit accent color for radio buttons in light theme */
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body:not(.theme-light) {
+    --primary-color: #2196f3;
+    --primary-hover: #1976d2;
+    --text-color: #ffffff;
+    --light-text: #aaaaaa;
+    --background: #121212;
+    --card-bg: #1e1e1e;
+    --border-color: #333333;
+    --success-color: #4caf50;
+    --error-color: #7f1e27;
+    --info-color: #03a9f4;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --btn-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    --primary-color-rgb: 33, 150, 243;
+  }
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif;
+  overflow: hidden !important; /* Force hidden overflow */
+}
+
+body {
+  width: 400px; /* Increased width to fit long names */
+  min-height: 400px;
+  max-height: 600px;
+  height: min-content;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: var(--text-color);
+  background-color: var(--background);
+  font-size: 14px;
+  border-radius: var(--border-radius);
+  overflow: hidden !important; /* Force hidden overflow */
+}
+
+.container {
+  padding: 20px;
+}
+
+/* Header with profile menu */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+#user-controls {
+  display: flex;
+  align-items: center;
+}
+
+#profile-menu-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s;
+}
+
+#profile-menu-trigger:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  #profile-menu-trigger:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+#username-display {
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+#profile-pic-mini {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary-color);
+}
+
+/* Dropdown Menu - Enhanced and Consistent Design */
+.dropdown-menu {
+  position: absolute;
+  top: 65px; /* Position below profile trigger */
+  right: 20px;
+  width: 220px;
+  background-color: var(--card-bg); /* Use solid background like other cards */
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  z-index: 1000;
+  display: none;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transform: translateY(-10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.dropdown-menu.active {
+  display: block;
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.dropdown-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.dropdown-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.dropdown-item {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.05);
+}
+
+.dropdown-item label {
+  margin-bottom: 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.dropdown-item label i {
+  color: var(--primary-color);
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.dropdown-item select {
+  width: 90px; /* Reduced from min-width: 120px */
+  padding: 8px 12px; /* Reduced horizontal padding */
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  color: var(--text-color);
+  background-color: var(--card-bg);
+  transition: border-color 0.2s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 12px;
+  text-overflow: ellipsis;
+  padding-right: 24px; /* Ensure text doesn't overlap with the arrow */
+  position: relative;
+  z-index: 1;
+}
+
+.theme-dark .dropdown-item select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  body:not(.theme-light) .dropdown-item select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  }
+}
+
+.dropdown-item::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  right: 16px;
+  width: 20px;
+  background-color: var(--card-bg);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.dropdown-item select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.dropdown-divider {
+  height: 1px;
+  background-color: var(--border-color);
+  margin: 0;
+}
+
+/* Menu link (including logout) */
+.menu-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  color: var(--text-color);
+  text-decoration: none;
+  cursor: pointer;
+  gap: 10px;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.menu-link i {
+  color: var(--primary-color);
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+/* Special styling for logout */
+.menu-link.logout {
+  background-color: var(--background);
+  color: var(--text-color);
+  margin: 0;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  justify-content: center; /* Center the text */
+  padding: 14px 16px; /* Slightly more vertical padding */
+}
+
+.menu-link.logout i {
+  color: var(--error-color);
+}
+
+.menu-link:hover {
+  background-color: rgba(var(--primary-color-rgb), 0.05);
+}
+
+.menu-link.logout:hover {
+  background-color: var(--error-color);
+}
+
+h1 {
+  font-size: 24px;
+  color: var(--primary-color);
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.card {
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: var(--border-radius);
+  background-color: var(--card-bg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.card-content {
+  padding: 4px 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.option-group {
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.option-title {
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+/* Improved dropdown styling */
+.form-control {
+  width: 100%;
+  padding: 12px;
+  padding-right: 25px; /* Extra space for dropdown arrow */
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  appearance: none; /* Remove default styling */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 99, 166, 0.2);
+}
+
+/* For dark mode dropdown icon */
+@media (prefers-color-scheme: dark) {
+  .form-control {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e0e0e0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  }
+}
+
+.btn {
+  padding: 12px 16px;
+  border-radius: var(--border-radius);
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: var(--btn-shadow);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.primary {
+  background-color: var(--primary-color);
+  color: white; /* Always white text for better contrast, regardless of theme */
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.secondary {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Improve radio button styling to adapt to theme */
+.radio-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 5px;
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s;
+}
+
+.radio-option:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+@media (prefers-color-scheme: dark) {
+  .radio-option:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.radio-option input[type="radio"] {
+  margin-right: 10px;
+  cursor: pointer;
+  accent-color: var(--radio-accent-color, var(--primary-color));
+  background-color: var(--card-bg); /* Use theme variable instead of hardcoded white */
+  position: relative; /* Enable positioning */
+  /* Reset appearance across browsers */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Consistent sizing */
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-color);
+  border-radius: 50%; /* Circular shape */
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Create the inner circle for checked state */
+.radio-option input[type="radio"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--radio-accent-color, var(--primary-color));
+  opacity: 0; /* Hide by default */
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Show inner circle when checked */
+.radio-option input[type="radio"]:checked {
+  border-color: var(--radio-accent-color, var(--primary-color));
+}
+
+.radio-option input[type="radio"]:checked::after {
+  opacity: 1; /* Show when checked */
+}
+
+/* Similar styling for checkboxes */
+.checkbox-group input[type="checkbox"] {
+  margin-right: 8px;
+  cursor: pointer;
+  accent-color: var(--radio-accent-color, var(--primary-color));
+  background-color: var(--card-bg); /* Use theme variable instead of hardcoded white */
+  /* Reset appearance across browsers */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Consistent sizing */
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px; /* Slightly rounded corners */
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+/* Create checkmark for checked state - adjust for visibility in dark mode */
+.checkbox-group input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 5px;
+  height: 10px;
+  border: solid white; /* Always use white for checkmark */
+  border-width: 0 2px 2px 0;
+  opacity: 0; /* Hide by default */
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Show checkmark when checked */
+.checkbox-group input[type="checkbox"]:checked {
+  background-color: var(--radio-accent-color, var(--primary-color));
+  border-color: var(--radio-accent-color, var(--primary-color));
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+  opacity: 1; /* Show when checked */
+}
+
+/* Ensure dark theme has properly contrasting form elements */
+.theme-dark .radio-option input[type="radio"],
+.theme-dark .checkbox-group input[type="checkbox"] {
+  border-color: var(--border-color);
+  background-color: var(--card-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  body:not(.theme-light) .radio-option input[type="radio"],
+  body:not(.theme-light) .checkbox-group input[type="checkbox"] {
+    border-color: var(--border-color);
+    background-color: var(--card-bg);
+  }
+}
+
+.radio-option label {
+  display: inline;
+  font-weight: normal;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.status-message {
+  margin-top: 5px;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+}
+
+.error {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: var (--error-color);
+  border: 1px solid rgba(244, 67, 54, 0.2);
+}
+
+.success {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: var(--success-color);
+  border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.info {
+  background-color: rgba(3, 169, 244, 0.1);
+  color: var(--info-color);
+  border: 1px solid rgba(3, 169, 244, 0.2);
+}
+
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background-color: var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 15px 0;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0;
+  background-color: var (--primary-color);
+  transition: width 0.3s ease;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+#profile-pic-container {
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  overflow: hidden;
+  margin-right: 15px;
+  border: 2px solid var(--primary-color);
+  flex-shrink: 0;
+}
+
+#profile-pic {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-details {
+  flex: 1;
+  padding-right: 45px; /* Make room for logout button */
+}
+
+#user-fullname {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#username {
+  margin: 0;
+  color: var(--light-text);
+  font-size: 14px;
+}
+
+#logout-container {
+  display: flex;
+  justify-content: center;
+  width: 40px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: var(--light-text);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.icon-btn:hover {
+  color: var(--primary-color);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  .icon-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+#download-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+#login-btn {
+  margin-top: 10px;
+}
+
+.checkbox-group {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 8px;
+  cursor: pointer;
+  accent-color: var(--radio-accent-color, var(--primary-color));
+  background-color: var(--card-bg); /* Use theme variable instead of hardcoded white */
+  /* Reset appearance across browsers */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /* Consistent sizing */
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border-color);
+  border-radius: 4px; /* Slightly rounded corners */
+  outline: none;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+/* Create checkmark for checked state - adjust for visibility in dark mode */
+.checkbox-group input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 5px;
+  height: 10px;
+  border: solid white; /* Always use white for checkmark */
+  border-width: 0 2px 2px 0;
+  opacity: 0; /* Hide by default */
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Show checkmark when checked */
+.checkbox-group input[type="checkbox"]:checked {
+  background-color: var(--radio-accent-color, var(--primary-color));
+  border-color: var(--radio-accent-color, var(--primary-color));
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+  opacity: 1; /* Show when checked */
+}
+
+.checkbox-group label {
+  display: inline;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.fade-enter {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  height: auto;
+  transition: opacity 300ms, height 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+  height: auto;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 300ms, height 300ms;
+}
+
+/* Theme variables */
+:root {
+  /* ... existing variables ... */
+}
+
+/* Explicitly add theme classes for when the user selects a theme */
+.theme-light {
+  --bg-color: #f5f5f7;
+  --text-color: #333;
+  --text-muted: #666;
+  --primary-color: #0057b8;
+  --primary-hover: #004494;
+  --error-color: #f44336;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --border-color: #ddd;
+  --card-bg: #fff;
+  --btn-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --primary-color-rgb: 0, 87, 184;
+}
+
+.theme-dark {
+  --bg-color: #1e1e1e;
+  --text-color: #e0e0e0;
+  --text-muted: #aaa;
+  --primary-color: #2196f3;
+  --primary-hover: #1976d2;
+  --error-color: #f44336;
+  --success-color: #4caf50;
+  --warning-color: #ff9800;
+  --border-color: #444;
+  --card-bg: #2d2d2d;
+  --btn-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --primary-color-rgb: 33, 150, 243;
+}
+
+/* Greeting section - redesigned to be more subtle */
+.greeting {
+  margin-bottom: 1.5rem;
+  border-radius: var(--border-radius);
+  background-color: transparent;
+  position: relative;
+}
+
+#user-greeting {
+  margin: 0;
+  font-size: 18px;
+  font-weight: normal;
+  color: var(--text-color);
+  opacity: 0.85;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dropdown-menu {
+    background-color: var(--background); /* Semi-transparent dark background */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Toast-style status messages */
+.status-message {
+  position: fixed;
+  bottom: -100px; /* Start below the viewport */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 380px;
+  padding: 14px 16px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 2000;
+  opacity: 0;
+  transition: bottom 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.status-message.visible {
+  bottom: 20px;
+  opacity: 1;
+}
+
+.status-message.hiding {
+  bottom: -100px;
+  opacity: 0;
+}
+
+.error {
+  background-color: var(--error-color);
+  color: var(--text-color);
+}
+
+.success {
+  background-color: var(--success-color);
+  color: var(--text-color);
+}
+
+.info {
+  background-color: var(--info-color);
+  color: var(--text-color);
+}
+
+/* Toast-style progress indicator */
+.progress-toast {
+  position: fixed;
+  bottom: -100px; /* Start below the viewport */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 380px;
+  padding: 14px 16px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1900; /* Just below status messages */
+  opacity: 0;
+  transition: bottom 0.3s ease-out, opacity 0.3s ease-out, background-color 0.5s ease;
+}
+
+/* Success state for progress toast */
+.progress-toast.success-toast {
+  background-color: var(--success-color);
+  color: white;
+  border-color: var(--success-color);
+}
+
+.progress-toast.success-toast h3,
+.progress-toast.success-toast p {
+  color: white;
+}
+
+.progress-toast.success-toast .progress-container {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.progress-toast.success-toast .progress-bar {
+  background-color: white;
+}
+
+.progress-toast.visible {
+  bottom: 20px;
+  opacity: 1;
+}
+
+.progress-toast h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: var(--primary-color);
+}
+
+.progress-toast .progress-container {
+  margin: 10px 0;
+}
