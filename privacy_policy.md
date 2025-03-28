@@ -22,7 +22,6 @@ The Extension requires certain permissions solely to provide its core functional
 - **host permissions**: Used only to access u:space and related university services
 - **scripting**: Used only to extract calendar information
 - **storage**: Used only to store your preferences locally on your device
-- **webRequest**: Used only to facilitate API requests to university services
 
 ## Data Storage
 Any data stored by the Extension (such as preferences) is stored locally on your device and is never transmitted elsewhere. This data remains under your control and can be deleted by uninstalling the Extension.

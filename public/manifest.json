@@ -21,7 +21,6 @@
     "activeTab",
     "cookies",
     "downloads",
-    "webRequest",
     "scripting"
   ],
   "host_permissions": [
